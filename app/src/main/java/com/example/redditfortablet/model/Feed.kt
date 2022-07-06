@@ -6,7 +6,7 @@ import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Root
 
 @Root(name = "feed", strict = false)
-data class Feed(
+data class Feed @JvmOverloads constructor(
     @field:Element(name = "category", required = false) @param:Element(name = "category")
     val category: String = "",
     @field:Element(name = "icon", required = false) @param:Element(name = "icon")
@@ -24,5 +24,5 @@ data class Feed(
     @field:Element(name = "subtitle", required = false) @param:Element(name = "subtitle")
     var subtitle: String = "",
     @field:ElementList(name = "entry", required = false, inline = true) @param:ElementList(name = "entry")
-    var entries: List<Entry> = emptyList()
+    var entries: List<Entry>
 )

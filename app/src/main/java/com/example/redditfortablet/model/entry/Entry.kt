@@ -1,14 +1,14 @@
 package com.example.redditfortablet.model.entry
 
-import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Element
 import org.simpleframework.xml.Root
 
 @Root(name = "entry", strict = false)
 data class Entry(
     @field:Element(name = "content", required = false) @param:Element(name = "content")
     var content: String = "",
-    @field:Element(name = "author", required = false) @param:Element(name = "author")
-    var author: String = "",
+    //@field:Element(name = "author", required = false) @param:Element(name = "author")
+    //var author: String = "",
     //@field:Element(name = "id", required = false) @param:Element(name = "id")
     //var id: String,
     @field:Element(name = "title", required = false) @param:Element(name = "title")

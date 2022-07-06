@@ -36,7 +36,7 @@ class FeedAdapter(val context: Context, val feedList: List<Feed>): RecyclerView.
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.feedTitle.text = feedList[position].title.toString()
+
 
 
     }

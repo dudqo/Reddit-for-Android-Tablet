@@ -37,20 +37,18 @@ class MainActivity : AppCompatActivity() {
             .addConverterFactory(SimpleXmlConverterFactory.create())
             .baseUrl(REDDIT_URL)
             .build()
+            .create(FeedAPI::class.java)
 
-
-        val feedAPI: FeedAPI = retrofit.create(FeedAPI::class.java)
-
-        val call: Call<Feed> = feedAPI.getFeed()
+        val call: Call<Feed> = retrofit.getFeed()
 
         call.enqueue(object : Callback<Feed?> {
             override fun onResponse(call: Call<Feed?>, response: Response<Feed?>) {
 
 
-                textViewTesting.text = response.body()!!.title
+                textViewTesting.text = response.body()?.entries.toString()
 
-                d("mainActivity", "onResponse: feed: " + response.body()!!.title);
-                d("mainActivity", "onResponse: Server Response: " + response.toString());
+                d("mainActivity", "onResponse: feed: " + response.body()!!.title)
+                d("mainActivity", "onResponse: Server Response: " + response.toString())
 
             }
 
@@ -60,6 +58,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<Feed?>, t: Throwable) {
                 d("mainActivy", "onFailure: " + t.message)
+                t.printStackTrace()
             }
         })
 
