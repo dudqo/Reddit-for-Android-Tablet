@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.redditfortablet.model.Feed
+import com.example.redditfortablet.model.entry.Entry
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,7 +46,9 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Feed?>, response: Response<Feed?>) {
 
 
-                textViewTesting.text = response.body()?.entries.toString()
+                textViewTesting.text = response.body()!!.entries.toString()
+
+                val entries: List<Entry> = response.body()!!.entries
 
                 d("mainActivity", "onResponse: feed: " + response.body()!!.title)
                 d("mainActivity", "onResponse: Server Response: " + response.toString())
