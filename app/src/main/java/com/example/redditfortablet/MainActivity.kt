@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val recyclerview_feed = findViewById<RecyclerView>(R.id.recyclerview_feed)
         val textViewTesting = findViewById<TextView>(R.id.textViewTesting)
-        textViewTesting.text = "hello world"
 
 
         linearLayoutManager = LinearLayoutManager(this)
@@ -46,12 +45,11 @@ class MainActivity : AppCompatActivity() {
 
         call.enqueue(object : Callback<Feed?> {
             override fun onResponse(call: Call<Feed?>, response: Response<Feed?>) {
-                val responseBody = response.body()!!
 
 
-                textViewTesting.text = responseBody.entrys.toString()
+                textViewTesting.text = response.body()!!.title
 
-                d("mainActivity", "onResponse: feed: " + response.body().toString());
+                d("mainActivity", "onResponse: feed: " + response.body()!!.title);
                 d("mainActivity", "onResponse: Server Response: " + response.toString());
 
             }

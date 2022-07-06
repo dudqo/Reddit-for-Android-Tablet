@@ -21,7 +21,7 @@
         android:layout_width="593dp"
         android:layout_height="658dp"
         android:layout_marginEnd="84dp"
-        android:text="textView string here"
+        android:text="textView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/recyclerview_feed"
