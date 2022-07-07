@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="150dp"
     android:paddingBottom="16dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
@@ -50,10 +50,12 @@
 
             <TextView
                 android:id="@+id/feedAuthor"
-                android:layout_width="79dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/feedTitle"
+                android:layout_alignParentEnd="true"
                 android:layout_marginTop="3dp"
+                android:layout_marginEnd="0dp"
                 android:gravity="center_vertical"
                 android:text="Author"
                 android:textSize="12sp" />
@@ -70,12 +72,6 @@
 
         </RelativeLayout>
 
-        <ProgressBar
-            android:id="@+id/feedProgressDialog"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true" />
 
 
     </RelativeLayout>

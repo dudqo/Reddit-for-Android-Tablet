@@ -8,23 +8,23 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.redditfortablet.model.Entry
 import com.example.redditfortablet.model.Feed
 
-class FeedAdapter(val context: Context, val feedList: List<Feed>): RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
+class FeedAdapter(val context: Context, val feedList: List<Entry>): RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         var feedImage: ImageView
         var feedTitle: TextView
         var feedAuther: TextView
         var feedUpdated: TextView
-        var feedProgessDialog: ProgressBar
 
         init {
             feedImage = itemView.findViewById(R.id.feedImage)
             feedTitle = itemView.findViewById(R.id.feedTitle)
             feedAuther = itemView.findViewById(R.id.feedAuthor)
             feedUpdated = itemView.findViewById(R.id.feedUpdated)
-            feedProgessDialog = itemView.findViewById(R.id.feedProgressDialog)
+
         }
 
 
@@ -36,7 +36,10 @@ class FeedAdapter(val context: Context, val feedList: List<Feed>): RecyclerView.
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
+        holder.feedTitle.text = feedList[position].post.title.toString()
+        holder.feedAuther.text = feedList[position].post.author.toString()
+        holder.feedUpdated.text = feedList[position].post.created.toString()
+        holder.feedImage
 
 
     }

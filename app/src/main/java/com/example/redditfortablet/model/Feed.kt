@@ -1,9 +1,7 @@
 package com.example.redditfortablet.model
 
 import com.google.gson.annotations.SerializedName
-import org.simpleframework.xml.Element
-import org.simpleframework.xml.ElementList
-import org.simpleframework.xml.Root
+
 
 data class NewsFeed(
     var data: Feed

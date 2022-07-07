@@ -15,7 +15,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 
 
 const val REDDIT_URL = "https://www.reddit.com/r/"
@@ -58,14 +57,16 @@ class MainActivity : AppCompatActivity() {
                 textViewTesting.text = stringBuilder
 
 
+                feedAdapter = FeedAdapter(baseContext, responseBody.data.entries)
+                feedAdapter.notifyDataSetChanged()
+                recyclerview_feed.adapter = feedAdapter
+
+
                 // d("mainActivity", "onResponse: feed: " + response.body()!!.title)
                 d("mainActivity", "onResponse: Server Response: " + response.toString())
 
             }
 
-            // feedAdapter = FeedAdapter(baseContext, responseBody)
-            // feedAdapter.notifyDataSetChanged()
-            // recyclerview_feed.adapter = feedAdapter
 
             override fun onFailure(call: Call<NewsFeed?>, t: Throwable) {
                 d("mainActivy", "onFailure: " + t.message)
