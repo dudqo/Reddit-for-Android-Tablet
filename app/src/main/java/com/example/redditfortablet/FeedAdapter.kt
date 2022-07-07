@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.redditfortablet.model.Entry
 import com.example.redditfortablet.model.Feed
 
@@ -39,7 +40,17 @@ class FeedAdapter(val context: Context, val feedList: List<Entry>): RecyclerView
         holder.feedTitle.text = feedList[position].post.title.toString()
         holder.feedAuther.text = feedList[position].post.author.toString()
         holder.feedUpdated.text = feedList[position].post.created.toString()
-        holder.feedImage
+        val image = feedList[position].post.thumbnail
+        if (feedList[position].post.thumbnail != "default") {
+            Glide.with(context)
+                .load(image)
+                .into(holder.feedImage)
+        } else {
+            Glide.with(context)
+                .load("https://www.redditinc.com/assets/images/site/reddit-logo.png")
+                .into(holder.feedImage)
+        }
+
 
 
     }
