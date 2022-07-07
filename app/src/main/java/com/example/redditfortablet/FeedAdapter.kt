@@ -1,16 +1,15 @@
 package com.example.redditfortablet
 
 import android.content.Context
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.redditfortablet.model.Entry
-import com.example.redditfortablet.model.Feed
 
 class FeedAdapter(val context: Context, val feedList: List<Entry>): RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
 
@@ -41,10 +40,12 @@ class FeedAdapter(val context: Context, val feedList: List<Entry>): RecyclerView
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.feedTitle.text = feedList[position].post.title
         holder.feedAuther.text = feedList[position].post.author
-        holder.feedUpdated.text = feedList[position].post.created.toString()
+        holder.feedUpdated.text = java.time.format.DateTimeFormatter.ISO_INSTANT
+            .format(java.time.Instant.ofEpochSecond(feedList[position].post.created))
         holder.feedSubreddit.text = "Posted on: " + feedList[position].post.subreddit
         val image = feedList[position].post.thumbnail
-        if (feedList[position].post.thumbnail != "default") {
+
+        if (Patterns.WEB_URL.matcher(image).matches()) {
             Glide.with(context)
                 .load(image)
                 .into(holder.feedImage)

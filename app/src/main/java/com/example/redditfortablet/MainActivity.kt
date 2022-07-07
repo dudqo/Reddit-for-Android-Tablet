@@ -15,6 +15,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import androidx.recyclerview.widget.RecyclerView.OnScrollListener as OnScrollListener
 
 
 const val REDDIT_URL = "https://www.reddit.com/r/"
@@ -51,6 +52,8 @@ class MainActivity : AppCompatActivity() {
                 feedAdapter = FeedAdapter(baseContext, responseBody.data.entries)
                 feedAdapter.notifyDataSetChanged()
                 recyclerview_feed.adapter = feedAdapter
+
+
 
 
                 // d("mainActivity", "onResponse: feed: " + response.body()!!.title)

@@ -17,10 +17,10 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="5dp"
         app:cardElevation="10dp"
-        app:contentPaddingRight="10dp"
-        app:contentPaddingLeft="10dp"
         app:cardMaxElevation="15dp"
-        tools:context= "com.example.redditfortablet.mainactivty" />
+        app:contentPaddingLeft="10dp"
+        app:contentPaddingRight="10dp"
+        tools:context="com.example.redditfortablet.mainactivty" />
 
     <RelativeLayout
         android:layout_width="500dp"
@@ -29,8 +29,8 @@
 
         <ImageView
             android:id="@+id/feedImage"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="124dp"
+            android:layout_height="match_parent"
             android:contentDescription="feed image"
             android:scaleType="centerCrop" />
 
