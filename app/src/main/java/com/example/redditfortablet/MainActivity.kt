@@ -46,15 +46,6 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<NewsFeed?>, response: Response<NewsFeed?>) {
                 val responseBody = response.body()!!
 
-                val stringBuilder = StringBuilder()
-
-                for (entry in responseBody.data.entries) {
-                    stringBuilder.append(entry.post.title)
-                    stringBuilder.append("\n")
-                }
-
-
-                textViewTesting.text = stringBuilder
 
 
                 feedAdapter = FeedAdapter(baseContext, responseBody.data.entries)

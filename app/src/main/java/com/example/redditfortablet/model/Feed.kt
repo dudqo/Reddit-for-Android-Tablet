@@ -25,5 +25,7 @@ data class Post(
     var num_comments: Int,
     var created: Long,
     var thumbnail: String,
-    var url: String
+    var url: String,
+    @SerializedName("subreddit_name_prefixed")
+    var subreddit: String
 )

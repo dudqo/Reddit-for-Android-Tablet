@@ -19,12 +19,14 @@ class FeedAdapter(val context: Context, val feedList: List<Entry>): RecyclerView
         var feedTitle: TextView
         var feedAuther: TextView
         var feedUpdated: TextView
+        var feedSubreddit: TextView
 
         init {
             feedImage = itemView.findViewById(R.id.feedImage)
             feedTitle = itemView.findViewById(R.id.feedTitle)
             feedAuther = itemView.findViewById(R.id.feedAuthor)
             feedUpdated = itemView.findViewById(R.id.feedUpdated)
+            feedSubreddit = itemView.findViewById(R.id.feedSubreddit)
 
         }
 
@@ -37,9 +39,10 @@ class FeedAdapter(val context: Context, val feedList: List<Entry>): RecyclerView
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.feedTitle.text = feedList[position].post.title.toString()
-        holder.feedAuther.text = feedList[position].post.author.toString()
+        holder.feedTitle.text = feedList[position].post.title
+        holder.feedAuther.text = feedList[position].post.author
         holder.feedUpdated.text = feedList[position].post.created.toString()
+        holder.feedSubreddit.text = "Posted on: " + feedList[position].post.subreddit
         val image = feedList[position].post.thumbnail
         if (feedList[position].post.thumbnail != "default") {
             Glide.with(context)

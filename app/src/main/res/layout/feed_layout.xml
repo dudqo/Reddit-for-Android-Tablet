@@ -61,14 +61,25 @@
                 android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/feedSubreddit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/feedAuthor"
+                android:layout_marginTop="12dp"
+                android:text="Subreddit" />
+
+            <TextView
                 android:id="@+id/feedUpdated"
                 android:layout_width="147dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/feedAuthor"
-                android:layout_marginTop="63dp"
+                android:layout_below="@+id/feedSubreddit"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="6dp"
                 android:gravity="center_vertical"
                 android:text="Updated"
                 android:textSize="12sp" />
+
 
         </RelativeLayout>
 
