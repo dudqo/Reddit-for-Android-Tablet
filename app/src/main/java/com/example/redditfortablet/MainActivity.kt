@@ -9,15 +9,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.redditfortablet.model.Feed
-import com.example.redditfortablet.model.entry.Entry
+import com.example.redditfortablet.model.NewsFeed
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 
 
-const val REDDIT_URL = "https://www.reddit.com/"
+const val REDDIT_URL = "https://www.reddit.com/r/"
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,25 +36,29 @@ class MainActivity : AppCompatActivity() {
         recyclerview_feed.layoutManager = linearLayoutManager
 
         val retrofit = Retrofit.Builder()
-            .addConverterFactory(SimpleXmlConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(REDDIT_URL)
             .build()
             .create(FeedAPI::class.java)
 
-        val call: Call<Feed> = retrofit.getFeed()
+        val call: Call<NewsFeed> = retrofit.getFeed()
 
-        call.enqueue(object : Callback<Feed?> {
-            override fun onResponse(call: Call<Feed?>, response: Response<Feed?>) {
+        call.enqueue(object : Callback<NewsFeed?> {
+            override fun onResponse(call: Call<NewsFeed?>, response: Response<NewsFeed?>) {
+                val responseBody = response.body()!!
+
+                val stringBuilder = StringBuilder()
+
+                for (entry in responseBody.data.entries) {
+                    stringBuilder.append(entry.post.title)
+                    stringBuilder.append("\n")
+                }
 
 
-                textViewTesting.text = response.body()!!.entries.toString()
+                textViewTesting.text = stringBuilder
 
-                val entries: List<Entry> = response.body()!!.entries
-                val title: String = response.body()!!.title
-                val subtitle: String = response.body()!!.subtitle
-                val id: String = response.body()!!.id
 
-                d("mainActivity", "onResponse: feed: " + response.body()!!.title)
+                // d("mainActivity", "onResponse: feed: " + response.body()!!.title)
                 d("mainActivity", "onResponse: Server Response: " + response.toString())
 
             }
@@ -62,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             // feedAdapter.notifyDataSetChanged()
             // recyclerview_feed.adapter = feedAdapter
 
-            override fun onFailure(call: Call<Feed?>, t: Throwable) {
+            override fun onFailure(call: Call<NewsFeed?>, t: Throwable) {
                 d("mainActivy", "onFailure: " + t.message)
                 t.printStackTrace()
             }
