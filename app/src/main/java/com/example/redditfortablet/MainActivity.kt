@@ -49,6 +49,9 @@ class MainActivity : AppCompatActivity() {
                 textViewTesting.text = response.body()!!.entries.toString()
 
                 val entries: List<Entry> = response.body()!!.entries
+                val title: String = response.body()!!.title
+                val subtitle: String = response.body()!!.subtitle
+                val id: String = response.body()!!.id
 
                 d("mainActivity", "onResponse: feed: " + response.body()!!.title)
                 d("mainActivity", "onResponse: Server Response: " + response.toString())
