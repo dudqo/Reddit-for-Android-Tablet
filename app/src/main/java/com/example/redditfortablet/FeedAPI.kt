@@ -3,6 +3,7 @@ package com.example.redditfortablet
 import com.example.redditfortablet.model.NewsFeed
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 
@@ -10,6 +11,6 @@ import retrofit2.http.Query
 
 interface FeedAPI {
 
-    @GET("korea.json")
-    fun getFeed(): Call<NewsFeed>
+    @GET("{subreddit}.json")
+    fun getFeed(@Path("subreddit") subreddit: String): Call<NewsFeed>
 }

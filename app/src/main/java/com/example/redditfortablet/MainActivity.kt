@@ -4,11 +4,12 @@ package com.example.redditfortablet
 
 import android.os.Bundle
 import android.util.Log.d
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.redditfortablet.model.Feed
+import com.example.redditfortablet.model.Post
 import com.example.redditfortablet.model.NewsFeed
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,16 +25,19 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var feedAdapter: FeedAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
+    val fragmentManger = supportFragmentManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val recyclerview_feed = findViewById<RecyclerView>(R.id.recyclerview_feed)
         val textViewContent = findViewById<TextView>(R.id.textViewContent)
+        val searchView = findViewById<SearchView>(R.id.searchView)
 
 
         linearLayoutManager = LinearLayoutManager(this)
         recyclerview_feed.layoutManager = linearLayoutManager
+
 
         val retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
@@ -56,6 +60,8 @@ class MainActivity : AppCompatActivity() {
                 feedAdapter.setOnItemClickListener(object: RecyclerViewInterface {
                     override fun onItemClick(position: Int) {
                         textViewContent.text = responseBody.data.entries.get(position).post.contentText
+                        val fragmentTransaction = fragmentManger.beginTransaction()
+
                     }
 
                 })
