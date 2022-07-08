@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
                 feedAdapter.setOnItemClickListener(object: RecyclerViewInterface {
                     override fun onItemClick(position: Int) {
-                        textViewContent.text = "clicked" + position.toString()
+                        textViewContent.text = responseBody.data.entries.get(position).post.contentText
                     }
 
                 })
