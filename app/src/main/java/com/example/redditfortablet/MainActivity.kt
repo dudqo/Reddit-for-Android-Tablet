@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var feedAdapter: FeedAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
     val fragmentManger = supportFragmentManager
+    private var searchText = "all"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +39,27 @@ class MainActivity : AppCompatActivity() {
         linearLayoutManager = LinearLayoutManager(this)
         recyclerview_feed.layoutManager = linearLayoutManager
 
+        run_retrofit()
+
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+                searchText = query
+                run_retrofit()
+                return false
+            }
+        })
+
+    }
+
+    private fun run_retrofit() {
+
+        val recyclerview_feed = findViewById<RecyclerView>(R.id.recyclerview_feed)
+        val textViewContent = findViewById<TextView>(R.id.textViewContent)
+        val searchView = findViewById<SearchView>(R.id.searchView)
 
         val retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
@@ -45,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             .build()
             .create(FeedAPI::class.java)
 
-        val call: Call<NewsFeed> = retrofit.getFeed()
+        val call: Call<NewsFeed> = retrofit.getFeed(searchText)
 
         call.enqueue(object : Callback<NewsFeed?> {
             override fun onResponse(call: Call<NewsFeed?>, response: Response<NewsFeed?>) {
@@ -75,9 +97,6 @@ class MainActivity : AppCompatActivity() {
                 t.printStackTrace()
             }
         })
-
-
-
     }
 
 }
