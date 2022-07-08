@@ -27,5 +27,7 @@ data class Post(
     var thumbnail: String,
     var url: String,
     @SerializedName("subreddit_name_prefixed")
-    var subreddit: String
+    var subreddit: String,
+    @SerializedName("selftext")
+    var contentText: String?
 )

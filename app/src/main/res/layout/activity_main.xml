@@ -10,21 +10,32 @@
         android:id="@+id/recyclerview_feed"
         android:layout_width="450dp"
         android:layout_height="match_parent"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.712" />
+        app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/textViewTesting"
-        android:layout_width="593dp"
-        android:layout_height="658dp"
-        android:layout_marginEnd="84dp"
-        android:text="textView"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.example.redditfortablet.post"
+        android:layout_width="800dp"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/recyclerview_feed"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textViewContent"
+        android:layout_width="577dp"
+        android:layout_height="618dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/fragmentContainerView"
+        app:layout_constraintStart_toEndOf="@+id/recyclerview_feed"
+        app:layout_constraintTop_toTopOf="@+id/fragmentContainerView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

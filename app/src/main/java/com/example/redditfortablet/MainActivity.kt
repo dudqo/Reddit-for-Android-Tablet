@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val recyclerview_feed = findViewById<RecyclerView>(R.id.recyclerview_feed)
-        val textViewTesting = findViewById<TextView>(R.id.textViewTesting)
+        val textViewContent = findViewById<TextView>(R.id.textViewContent)
 
 
         linearLayoutManager = LinearLayoutManager(this)
@@ -47,17 +47,19 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<NewsFeed?>, response: Response<NewsFeed?>) {
                 val responseBody = response.body()!!
 
-
-
                 feedAdapter = FeedAdapter(baseContext, responseBody.data.entries)
                 feedAdapter.notifyDataSetChanged()
                 recyclerview_feed.adapter = feedAdapter
 
 
 
+                feedAdapter.setOnItemClickListener(object: RecyclerViewInterface {
+                    override fun onItemClick(position: Int) {
+                        textViewContent.text = "clicked" + position.toString()
+                    }
 
-                // d("mainActivity", "onResponse: feed: " + response.body()!!.title)
-                d("mainActivity", "onResponse: Server Response: " + response.toString())
+                })
+
 
             }
 

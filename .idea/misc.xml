@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/sukyb/AndroidStudioProjects/RedditforTablet/app/src/main/res/layout/activity_main.xml" value="0.21515892420537897" />
+        <entry key="..\:/Users/sukyb/AndroidStudioProjects/RedditforTablet/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/sukyb/AndroidStudioProjects/RedditforTablet/app/src/main/res/layout/feed_layout.xml" value="0.75" />
+        <entry key="..\:/Users/sukyb/AndroidStudioProjects/RedditforTablet/app/src/main/res/layout/fragment_post.xml" value="0.18255208333333334" />
       </map>
     </option>
   </component>

@@ -7,13 +7,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.redditfortablet.model.Entry
+import org.w3c.dom.Text
+import java.lang.NullPointerException
+
 
 class FeedAdapter(val context: Context, val feedList: List<Entry>): RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
 
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    lateinit var recyclerViewInterface: RecyclerViewInterface
+
+    fun setOnItemClickListener(listener: RecyclerViewInterface) {
+        recyclerViewInterface = listener
+    }
+
+    class ViewHolder(itemView: View, listener: RecyclerViewInterface): RecyclerView.ViewHolder(itemView) {
         var feedImage: ImageView
         var feedTitle: TextView
         var feedAuther: TextView
@@ -27,6 +37,11 @@ class FeedAdapter(val context: Context, val feedList: List<Entry>): RecyclerView
             feedUpdated = itemView.findViewById(R.id.feedUpdated)
             feedSubreddit = itemView.findViewById(R.id.feedSubreddit)
 
+            itemView.setOnClickListener {
+                listener.onItemClick(adapterPosition)
+            }
+
+
         }
 
 
@@ -34,7 +49,7 @@ class FeedAdapter(val context: Context, val feedList: List<Entry>): RecyclerView
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(context).inflate(R.layout.feed_layout, parent, false)
-        return ViewHolder(itemView)
+        return ViewHolder(itemView, recyclerViewInterface)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -54,6 +69,7 @@ class FeedAdapter(val context: Context, val feedList: List<Entry>): RecyclerView
                 .load("https://www.redditinc.com/assets/images/site/reddit-logo.png")
                 .into(holder.feedImage)
         }
+
 
 
 

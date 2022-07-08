@@ -10,6 +10,6 @@ import retrofit2.http.Query
 
 interface FeedAPI {
 
-    @GET("all.json")
+    @GET("korea.json")
     fun getFeed(): Call<NewsFeed>
 }
