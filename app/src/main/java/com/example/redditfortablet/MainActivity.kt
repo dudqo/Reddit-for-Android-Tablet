@@ -11,15 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.redditfortablet.model.Post
 import com.example.redditfortablet.model.NewsFeed
+import com.example.redditfortablet.retrofitBuilder.retrofit
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import androidx.recyclerview.widget.RecyclerView.OnScrollListener as OnScrollListener
 
 
-const val REDDIT_URL = "https://www.reddit.com/r/"
 
 class MainActivity : AppCompatActivity() {
 
@@ -59,13 +56,7 @@ class MainActivity : AppCompatActivity() {
 
         val recyclerview_feed = findViewById<RecyclerView>(R.id.recyclerview_feed)
         val textViewContent = findViewById<TextView>(R.id.textViewContent)
-        val searchView = findViewById<SearchView>(R.id.searchView)
 
-        val retrofit = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(REDDIT_URL)
-            .build()
-            .create(FeedAPI::class.java)
 
         val call: Call<NewsFeed> = retrofit.getFeed(searchText)
 

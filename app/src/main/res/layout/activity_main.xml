@@ -18,7 +18,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="com.example.redditfortablet.post"
+        android:name="com.example.redditfortablet.Post"
         android:layout_width="805dp"
         android:layout_height="705dp"
         app:layout_constraintBottom_toBottomOf="parent"

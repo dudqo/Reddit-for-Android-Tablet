@@ -7,10 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-class post : Fragment() {
+class Post : Fragment() {
 
     companion object {
-        fun newInstance() = post()
+        fun newInstance() = Post()
     }
 
     private lateinit var viewModel: PostViewModel
@@ -25,7 +25,7 @@ class post : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(PostViewModel::class.java)
-        // TODO: Use the ViewModel
+
     }
 
 }
