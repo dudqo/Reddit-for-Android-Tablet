@@ -7,6 +7,7 @@ import android.util.Log.d
 import android.widget.SearchView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.redditfortablet.model.Post
@@ -22,7 +23,6 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var feedAdapter: FeedAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
-    val fragmentManger = supportFragmentManager
     private var searchText = "all"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,7 +73,13 @@ class MainActivity : AppCompatActivity() {
                 feedAdapter.setOnItemClickListener(object: RecyclerViewInterface {
                     override fun onItemClick(position: Int) {
                         textViewContent.text = responseBody.data.entries.get(position).post.contentText
+
+                        val fragmentManger = supportFragmentManager
+                        val postFragment: Fragment = Post()
                         val fragmentTransaction = fragmentManger.beginTransaction()
+                        fragmentTransaction.replace(R.id.fragmentContainerView, postFragment)
+                        fragmentTransaction.commit()
+
 
                     }
 
