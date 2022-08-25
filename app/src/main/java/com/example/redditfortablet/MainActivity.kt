@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log.d
 import android.widget.SearchView
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,12 +25,12 @@ class MainActivity : AppCompatActivity() {
     lateinit var feedAdapter: FeedAdapter
     lateinit var linearLayoutManager: LinearLayoutManager
     private var searchText = "all"
+    private val postViewModel: PostViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val recyclerview_feed = findViewById<RecyclerView>(R.id.recyclerview_feed)
-        val textViewContent = findViewById<TextView>(R.id.textViewContent)
         val searchView = findViewById<SearchView>(R.id.searchView)
 
 
@@ -55,7 +56,6 @@ class MainActivity : AppCompatActivity() {
     private fun run_retrofit() {
 
         val recyclerview_feed = findViewById<RecyclerView>(R.id.recyclerview_feed)
-        val textViewContent = findViewById<TextView>(R.id.textViewContent)
 
 
         val call: Call<NewsFeed> = retrofit.getFeed(searchText)
@@ -72,7 +72,11 @@ class MainActivity : AppCompatActivity() {
 
                 feedAdapter.setOnItemClickListener(object: RecyclerViewInterface {
                     override fun onItemClick(position: Int) {
-                        textViewContent.text = responseBody.data.entries.get(position).post.contentText
+                        postViewModel.setPostPosition(position)
+                        postViewModel.setContent(responseBody.data.entries.get(position).post.contentText.toString())
+                        postViewModel.setTitle(responseBody.data.entries.get(position).post.title)
+
+
 
                         val fragmentManger = supportFragmentManager
                         val postFragment: Fragment = Post()
