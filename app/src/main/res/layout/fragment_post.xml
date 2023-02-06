@@ -7,32 +7,39 @@
     tools:context=".Post">
 
     <TextView
-        android:id="@+id/post_title"
-        android:layout_width="798dp"
-        android:layout_height="683dp"
-        android:layout_marginBottom="8dp"
-        android:text="Post Title"
-        app:layout_constraintBottom_toTopOf="@+id/post_comments"
+        android:id="@+id/post_content"
+        android:layout_width="795dp"
+        android:layout_height="318dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.993"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/post_image"
+        app:layout_constraintVertical_bias="0.985" />
+
+    <ImageView
+        android:id="@+id/post_image"
+        android:layout_width="800dp"
+        android:layout_height="339dp"
+        android:layout_marginBottom="332dp"
+        android:contentDescription="post image"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/post_content"
+        android:id="@+id/post_title"
         android:layout_width="802dp"
         android:layout_height="117dp"
-        android:text="Post Content"
-        app:layout_constraintBottom_toTopOf="@+id/post_title"
+        app:layout_constraintBottom_toTopOf="@+id/post_image"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/post_comments"
-        android:layout_width="795dp"
-        android:layout_height="458dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

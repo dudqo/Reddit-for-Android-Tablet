@@ -5,7 +5,6 @@ package com.example.redditfortablet
 import android.os.Bundle
 import android.util.Log.d
 import android.widget.SearchView
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -46,6 +45,8 @@ class MainActivity : AppCompatActivity() {
 
             override fun onQueryTextSubmit(query: String): Boolean {
                 searchText = query
+
+
                 run_retrofit()
                 return false
             }
@@ -75,14 +76,16 @@ class MainActivity : AppCompatActivity() {
                         postViewModel.setPostPosition(position)
                         postViewModel.setContent(responseBody.data.entries.get(position).post.contentText.toString())
                         postViewModel.setTitle(responseBody.data.entries.get(position).post.title)
+                        postViewModel.setImage(responseBody.data.entries.get(position).post.thumbnail)
 
 
 
                         val fragmentManger = supportFragmentManager
                         val postFragment: Fragment = Post()
                         val fragmentTransaction = fragmentManger.beginTransaction()
-                        fragmentTransaction.replace(R.id.fragmentContainerView, postFragment)
+                        fragmentTransaction.add(R.id.fragmentContainerView, postFragment)
                         fragmentTransaction.commit()
+
 
 
                     }
