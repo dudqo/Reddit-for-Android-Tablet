@@ -3,20 +3,18 @@
 package com.example.redditfortablet
 
 import android.os.Bundle
-import android.util.Log.d
 import android.widget.SearchView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.redditfortablet.model.Post
 import com.example.redditfortablet.model.NewsFeed
 import com.example.redditfortablet.retrofitBuilder.retrofit
-import retrofit2.Call
-import retrofit2.Callback
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Response
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,8 +29,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val recyclerview_feed = findViewById<RecyclerView>(R.id.recyclerview_feed)
         val searchView = findViewById<SearchView>(R.id.searchView)
-
-
         linearLayoutManager = LinearLayoutManager(this)
         recyclerview_feed.layoutManager = linearLayoutManager
 
@@ -59,48 +55,35 @@ class MainActivity : AppCompatActivity() {
         val recyclerview_feed = findViewById<RecyclerView>(R.id.recyclerview_feed)
 
 
-        val call: Call<NewsFeed> = retrofit.getFeed(searchText)
+        GlobalScope.launch(Dispatchers.IO) {
+            val call: Response<NewsFeed> = retrofit.getFeed(searchText)
+            val responseBody = call.body()!!
 
-        call.enqueue(object : Callback<NewsFeed?> {
-            override fun onResponse(call: Call<NewsFeed?>, response: Response<NewsFeed?>) {
-                val responseBody = response.body()!!
+            feedAdapter = FeedAdapter(baseContext, responseBody.data.entries)
+            feedAdapter.notifyDataSetChanged()
 
-                feedAdapter = FeedAdapter(baseContext, responseBody.data.entries)
-                feedAdapter.notifyDataSetChanged()
+
+            runOnUiThread {
                 recyclerview_feed.adapter = feedAdapter
-
-
-
-                feedAdapter.setOnItemClickListener(object: RecyclerViewInterface {
-                    override fun onItemClick(position: Int) {
-                        postViewModel.setPostPosition(position)
-                        postViewModel.setContent(responseBody.data.entries.get(position).post.contentText.toString())
-                        postViewModel.setTitle(responseBody.data.entries.get(position).post.title)
-                        postViewModel.setImage(responseBody.data.entries.get(position).post.thumbnail)
-
-
-
-                        val fragmentManger = supportFragmentManager
-                        val postFragment: Fragment = Post()
-                        val fragmentTransaction = fragmentManger.beginTransaction()
-                        fragmentTransaction.add(R.id.fragmentContainerView, postFragment)
-                        fragmentTransaction.commit()
-
-
-
-                    }
-
-                })
-
-
             }
+            feedAdapter.setOnItemClickListener(object: RecyclerViewInterface {
+                override fun onItemClick(position: Int) {
+                    postViewModel.setPostPosition(position)
+                    postViewModel.setContent(responseBody.data.entries.get(position).post.contentText.toString())
+                    postViewModel.setTitle(responseBody.data.entries.get(position).post.title)
+                    postViewModel.setImage(responseBody.data.entries.get(position).post.thumbnail)
 
 
-            override fun onFailure(call: Call<NewsFeed?>, t: Throwable) {
-                d("mainActivy", "onFailure: " + t.message)
-                t.printStackTrace()
-            }
-        })
+                    val fragmentManger = supportFragmentManager
+                    val postFragment: Fragment = Post()
+                    val fragmentTransaction = fragmentManger.beginTransaction()
+                    fragmentTransaction.add(R.id.fragmentContainerView, postFragment)
+                    fragmentTransaction.commit()
+                }
+            })
+        }
+
+
     }
 
 }
