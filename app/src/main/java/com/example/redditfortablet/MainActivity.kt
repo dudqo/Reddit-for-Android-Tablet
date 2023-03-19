@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.example.redditfortablet.model.NewsFeed
 import com.example.redditfortablet.retrofitBuilder.retrofit
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var linearLayoutManager: LinearLayoutManager
     private var searchText = "all"
     private val postViewModel: PostViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
