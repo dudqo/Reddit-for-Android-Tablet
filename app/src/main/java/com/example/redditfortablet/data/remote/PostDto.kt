@@ -1,4 +1,4 @@
-package com.example.redditfortablet.model
+package com.example.redditfortablet.data.remote
 
 import com.google.gson.annotations.SerializedName
 
@@ -16,10 +16,10 @@ data class Feed(
 
 data class Entry(
     @SerializedName("data")
-    var post: Post
+    var post: PostDto
 )
 
-data class Post(
+data class PostDto(
     var author: String,
     var title: String,
     var num_comments: Int,

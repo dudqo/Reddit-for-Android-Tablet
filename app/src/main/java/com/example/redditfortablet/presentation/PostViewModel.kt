@@ -1,4 +1,4 @@
-package com.example.redditfortablet
+package com.example.redditfortablet.presentation
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

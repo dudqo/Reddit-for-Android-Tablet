@@ -1,4 +1,4 @@
-package com.example.redditfortablet
+package com.example.redditfortablet.presentation
 
 interface RecyclerViewInterface {
 

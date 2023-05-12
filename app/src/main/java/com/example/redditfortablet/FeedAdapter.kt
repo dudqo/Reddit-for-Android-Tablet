@@ -7,12 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.redditfortablet.model.Entry
-import org.w3c.dom.Text
-import java.lang.NullPointerException
+import com.example.redditfortablet.data.remote.Entry
+import com.example.redditfortablet.presentation.RecyclerViewInterface
 
 
 class FeedAdapter(val context: Context, val feedList: List<Entry>): RecyclerView.Adapter<FeedAdapter.ViewHolder>() {

@@ -8,11 +8,17 @@ import android.widget.SearchView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.redditfortablet.model.Post
-import com.example.redditfortablet.model.NewsFeed
-import com.example.redditfortablet.retrofitBuilder.retrofit
+import androidx.viewpager2.widget.ViewPager2
+import com.example.redditfortablet.data.remote.NewsFeed
+import com.example.redditfortablet.presentation.Post
+import com.example.redditfortablet.presentation.PostViewModel
+import com.example.redditfortablet.presentation.RecyclerViewInterface
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,7 +35,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val recyclerview_feed = findViewById<RecyclerView>(R.id.recyclerview_feed)
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        val navController = findNavController(R.id.fragmentContainerView)
+
+        bottomNavigationView.setupWithNavController(navController)
+
+        /*val recyclerview_feed = findViewById<RecyclerView>(R.id.recyclerview_feed)
         val searchView = findViewById<SearchView>(R.id.searchView)
 
 
@@ -50,11 +62,11 @@ class MainActivity : AppCompatActivity() {
                 run_retrofit()
                 return false
             }
-        })
+        })*/
 
     }
 
-    private fun run_retrofit() {
+/*    private fun run_retrofit() {
 
         val recyclerview_feed = findViewById<RecyclerView>(R.id.recyclerview_feed)
 
@@ -101,7 +113,7 @@ class MainActivity : AppCompatActivity() {
                 t.printStackTrace()
             }
         })
-    }
+    }*/
 
 }
 
